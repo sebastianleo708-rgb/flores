@@ -1,461 +1,398 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#100d12">
-<meta name="description" content="Un pequeño detalle hecho con mucho amor.">
-<title>Feliz primer mes, mi amor ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#100d12">
+    <meta name="description" content="Un pequeño detalle hecho con mucho amor.">
+    <title>Feliz primer mes, mi amor ❤️</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<style>
-*{box-sizing:border-box}
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-html,body{
-margin:0;width:100%;min-height:100%;
-background:#100d12;color:#fff;
-font-family:'Cormorant Garamond',Georgia,serif;
-}
+        body {
+            min-height: 100vh;
+            background: #100d12;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
 
-body{overflow:hidden}
+        /* PANTALLA INICIAL */
+        .start-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 25px;
+            background:
+                radial-gradient(circle at center, #39202c 0%, #100d12 75%);
+            transition: opacity 1s ease, visibility 1s ease;
+        }
 
-.scene{
-position:relative;
-isolation:isolate;
-display:grid;
-place-items:center;
-width:100%;
-min-height:100svh;
-overflow:hidden;
-background:#100d12;
-}
+        .start-screen.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
 
-/* VIDEO DE FONDO */
+        .welcome {
+            max-width: 500px;
+            animation: appear 1.5s ease;
+        }
 
-.scene video{
-position:fixed;
-z-index:-4;
-inset:0;
-width:100%;
-height:100%;
-object-fit:cover;
-object-position:center;
-filter:brightness(.64) saturate(.82);
-}
+        .welcome .small-heart {
+            font-size: 38px;
+            margin-bottom: 25px;
+            animation: heartbeat 1.5s infinite;
+        }
 
-.shade{
-position:fixed;
-z-index:-3;
-inset:0;
-background:
-linear-gradient(180deg,rgba(10,8,12,.38),rgba(16,10,16,.15) 40%,rgba(10,8,12,.76)),
-radial-gradient(ellipse at center,transparent 15%,rgba(10,8,12,.35) 100%);
-}
+        .welcome h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(55px, 12vw, 85px);
+            font-weight: normal;
+            color: #f5c6d5;
+            margin-bottom: 18px;
+        }
 
-.grain{
-position:fixed;
-z-index:-2;
-inset:0;
-pointer-events:none;
-opacity:.10;
-background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
-}
+        .welcome p {
+            font-size: 11px;
+            letter-spacing: 4px;
+            line-height: 2;
+            color: #e5cbd4;
+            margin-bottom: 35px;
+        }
 
-/* PANTALLA DE BIENVENIDA */
+        .open-button {
+            padding: 15px 32px;
+            border: 1px solid #e8b5c6;
+            border-radius: 40px;
+            background: transparent;
+            color: #ffe4ec;
+            font-family: inherit;
+            font-size: 13px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: .3s;
+        }
 
-.start-screen{
-position:fixed;
-inset:0;
-z-index:100;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-padding:25px;
-text-align:center;
-background:
-radial-gradient(ellipse at center,rgba(111,48,75,.20),transparent 65%),
-linear-gradient(135deg,#100d12,#1c1019 55%,#100d12);
-transition:opacity 1s ease,visibility 1s ease;
-}
+        .open-button:hover {
+            background: #e8b5c6;
+            color: #24131b;
+            transform: scale(1.05);
+        }
 
-.start-screen.hidden{
-opacity:0;
-visibility:hidden;
-pointer-events:none;
-}
+        /* CONTENIDO PRINCIPAL */
+        .content {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 55px 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1.5s ease;
+        }
 
-.start-heart{
-font-size:37px;
-color:#f2b5c9;
-margin-bottom:24px;
-animation:pulse 2s infinite;
-}
+        .content.show {
+            opacity: 1;
+            visibility: visible;
+        }
 
-.start-title{
-font-family:'Parisienne',cursive;
-font-size:clamp(48px,10vw,76px);
-font-weight:400;
-color:#f2c0d0;
-margin:0 0 12px;
-text-shadow:0 0 30px rgba(242,176,200,.3);
-}
+        .video-container {
+            position: relative;
+            width: min(90%, 650px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 60px rgba(232, 181, 198, .15);
+            border: 1px solid rgba(255,255,255,.15);
+            animation: appear 1.5s ease;
+        }
 
-.start-subtitle{
-font-family:Arial,sans-serif;
-font-size:12px;
-letter-spacing:2px;
-color:rgba(255,240,245,.75);
-margin-bottom:38px;
-}
+        .video-container video {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+            object-fit: contain;
+            background: #100d12;
+        }
 
-.start-button{
-position:relative;
-overflow:hidden;
-border:1px solid rgba(255,255,255,.4);
-border-radius:50px;
-padding:15px 34px;
-background:linear-gradient(135deg,#9c4967,#d58ba5);
-color:white;
-font-family:Arial,sans-serif;
-font-size:12px;
-letter-spacing:2px;
-cursor:pointer;
-box-shadow:0 8px 30px rgba(181,83,120,.3);
-transition:transform .3s,box-shadow .3s;
-}
+        .message {
+            text-align: center;
+            max-width: 650px;
+            margin-top: 35px;
+            animation: appear 2s ease;
+        }
 
-.start-button:hover{
-transform:translateY(-3px) scale(1.04);
-box-shadow:0 12px 38px rgba(181,83,120,.5);
-}
+        .message h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(45px, 10vw, 70px);
+            font-weight: normal;
+            color: #f5c6d5;
+            margin-bottom: 15px;
+        }
 
-.start-button span{margin-left:8px}
+        .message p {
+            font-size: 13px;
+            line-height: 2.1;
+            font-weight: 300;
+            color: #eadde2;
+            letter-spacing: .4px;
+        }
 
-/* CONTENIDO PRINCIPAL */
+        .message .final-heart {
+            font-size: 28px;
+            margin-top: 20px;
+        }
 
-.content{
-width:min(90%,680px);
-padding:35px 20px;
-text-align:center;
-opacity:0;
-transform:translateY(22px);
-filter:blur(7px);
-transition:opacity 1.6s ease,transform 1.6s ease,filter 1.6s ease;
-pointer-events:none;
-}
+        /* BOTÓN DE MÚSICA */
+        .sound-button {
+            position: fixed;
+            z-index: 5;
+            right: 20px;
+            bottom: 20px;
+            padding: 12px 18px;
+            border: 1px solid rgba(245,198,213,.6);
+            border-radius: 30px;
+            background: rgba(20, 13, 19, .8);
+            color: #ffe4ec;
+            font-family: inherit;
+            font-size: 11px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            display: none;
+        }
 
-.content.show{
-opacity:1;
-transform:translateY(0);
-filter:blur(0);
-pointer-events:auto;
-}
+        .sound-button.show {
+            display: block;
+        }
 
-.eyebrow{
-font-family:Arial,sans-serif;
-font-size:10px;
-letter-spacing:.34em;
-text-transform:uppercase;
-color:#f1c4d2;
-margin-bottom:24px;
-}
+        /* CORAZONES FLOTANTES */
+        .heart {
+            position: fixed;
+            bottom: -30px;
+            z-index: 2;
+            pointer-events: none;
+            color: #e8a7bd;
+            opacity: 0;
+            animation: floatUp linear forwards;
+        }
 
-.heart{
-color:#f2b5c9;
-font-size:30px;
-display:block;
-margin:0 auto 18px;
-animation:pulse 2.4s ease-in-out infinite;
-}
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            15% {
+                opacity: .8;
+            }
+            100% {
+                transform: translateY(-110vh) rotate(40deg);
+                opacity: 0;
+            }
+        }
 
-h1{
-font-family:'Parisienne',cursive;
-font-weight:400;
-font-size:clamp(48px,9vw,78px);
-line-height:1.12;
-margin:0 auto 20px;
-text-shadow:0 3px 28px rgba(0,0,0,.5);
-}
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
 
-h1 span{color:#f2c0d0}
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-.sub{
-font-family:Arial,sans-serif;
-font-size:13px;
-line-height:1.9;
-letter-spacing:.04em;
-color:rgba(255,245,248,.93);
-max-width:440px;
-margin:0 auto;
-}
+        @media (max-width: 600px) {
+            .content {
+                padding: 35px 15px;
+            }
 
-.rule{
-height:1px;
-width:52px;
-background:#e9aebe;
-margin:28px auto 0;
-opacity:.8;
-}
+            .video-container {
+                width: 100%;
+            }
 
-/* CORAZONES FLOTANTES */
+            .message p {
+                font-size: 12px;
+            }
 
-.floating-hearts{
-position:fixed;
-inset:0;
-z-index:-1;
-pointer-events:none;
-overflow:hidden;
-}
-
-.floating-heart{
-position:absolute;
-bottom:-50px;
-color:#f2b5c9;
-opacity:0;
-animation:floatUp linear forwards;
-text-shadow:0 0 12px rgba(242,181,201,.5);
-}
-
-/* BOTON DE SONIDO */
-
-.sound{
-position:fixed;
-bottom:max(26px,env(safe-area-inset-bottom));
-left:50%;
-transform:translateX(-50%);
-z-index:20;
-border:1px solid rgba(255,255,255,.42);
-background:rgba(18,12,18,.45);
-backdrop-filter:blur(12px);
-color:#fff;
-border-radius:999px;
-padding:12px 19px;
-font-family:Arial,sans-serif;
-font-size:11px;
-letter-spacing:.12em;
-text-transform:uppercase;
-cursor:pointer;
-opacity:0;
-visibility:hidden;
-transition:opacity .8s ease;
-}
-
-.sound.visible{
-opacity:1;
-visibility:visible;
-}
-
-.sound span{
-color:#f2c0d0;
-margin-right:7px;
-}
-
-/* ANIMACIONES */
-
-@keyframes pulse{
-0%,100%{transform:scale(1);opacity:.85}
-50%{transform:scale(1.14);opacity:1}
-}
-
-@keyframes floatUp{
-0%{transform:translateY(0) rotate(0deg);opacity:0}
-10%{opacity:.7}
-85%{opacity:.5}
-100%{transform:translateY(-110vh) rotate(35deg);opacity:0}
-}
-
-@media(prefers-reduced-motion:reduce){
-*,*::before,*::after{
-animation:none!important;
-transition:none!important;
-}
-}
-
-@media(max-width:600px){
-.content{width:94%;padding:25px 12px}
-.start-subtitle{font-size:10px;line-height:1.8}
-}
-</style>
+            .sound-button {
+                right: 15px;
+                bottom: 15px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<main class="scene">
+    <!-- MÚSICA INDEPENDIENTE -->
+    <audio id="musica" loop preload="auto">
+        <source src="Cancionmes.mp3" type="audio/mpeg">
+    </audio>
 
-<!-- VIDEO -->
-<video id="memory" autoplay muted loop playsinline preload="auto" aria-label="Nuestro recuerdo">
-<source src="video-boomerang.mp4" type="video/mp4">
-</video>
+    <!-- PANTALLA DE BIENVENIDA -->
+    <section class="start-screen" id="startScreen">
+        <div class="welcome">
+            <div class="small-heart">♡</div>
 
-<div class="shade"></div>
-<div class="grain"></div>
+            <h1>Hola, mi amor</h1>
 
-<!-- CORAZONES -->
-<div class="floating-hearts" id="floatingHearts"></div>
+            <p>
+                TENGO UN PEQUEÑO<br>
+                DETALLE PARA TI...
+            </p>
 
-<!-- PANTALLA INICIAL -->
-<div class="start-screen" id="startScreen">
+            <button class="open-button" id="openButton">
+                Abrir mi regalo ♡
+            </button>
+        </div>
+    </section>
 
-<div class="start-heart">♡</div>
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="content" id="content">
 
-<h2 class="start-title">Hola, mi amor</h2>
+        <div class="video-container">
+            <video
+                id="memory"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="auto">
+                <source src="video-boomerang.mp4" type="video/mp4">
+                Tu navegador no puede reproducir este video.
+            </video>
+        </div>
 
-<p class="start-subtitle">
-TENGO UN PEQUEÑO DETALLE PARA TI...
-</p>
+        <div class="message">
+            <h2>Feliz primer mes, mi amor</h2>
 
-<button class="start-button" id="startBtn">
-Abrir mi regalo <span>♡</span>
-</button>
+            <p>
+                Hoy cumplimos nuestro primer mes juntos,
+                y aunque quizás parezca poco tiempo,
+                para mí ha sido suficiente para darme cuenta
+                de lo especial que eres en mi vida.
+                <br><br>
+                Gracias por cada sonrisa, cada momento,
+                cada abrazo y cada instante que compartimos.
+                Me haces muy feliz y quiero seguir creando
+                muchísimos recuerdos a tu lado.
+                <br><br>
+                Este es solo el comienzo de una historia
+                que espero seguir escribiendo contigo.
+                Te quiero muchísimo, mi amor.
+            </p>
 
-</div>
+            <div class="final-heart">❤️</div>
+        </div>
 
-<!-- DEDICATORIA -->
-<section class="content" id="content">
+    </main>
 
-<div class="eyebrow">
-Un pequeño recuerdo para nosotros
-</div>
+    <!-- CONTROL DE MÚSICA -->
+    <button class="sound-button" id="soundButton">
+        ♫ Silenciar música
+    </button>
 
-<span class="heart">♡</span>
+    <script>
+        const startScreen = document.getElementById("startScreen");
+        const openButton = document.getElementById("openButton");
+        const content = document.getElementById("content");
+        const video = document.getElementById("memory");
+        const musica = document.getElementById("musica");
+        const soundButton = document.getElementById("soundButton");
 
-<h1>
-Feliz primer mes<br>
-<span>mi amor ❤️</span>
-</h1>
+        let musicPlaying = false;
 
-<p class="sub">
-Que este sea solo el comienzo de una historia
-llena de momentos bonitos. Te elegiría
-una y mil veces.
-</p>
+        // ABRIR EL REGALO
+        openButton.addEventListener("click", async () => {
 
-<div class="rule"></div>
+            startScreen.classList.add("hide");
+            content.classList.add("show");
+            soundButton.classList.add("show");
 
-</section>
+            // El video siempre permanece sin sonido
+            video.muted = true;
+            video.currentTime = 0;
+            video.play().catch(error => {
+                console.log("No se pudo iniciar el video:", error);
+            });
 
-<!-- SONIDO -->
-<button class="sound" id="sound" type="button">
-<span>♫</span> Activar sonido
-</button>
+            // Iniciar la canción independiente
+            musica.volume = 0.7;
 
-</main>
+            try {
+                await musica.play();
+                musicPlaying = true;
+                soundButton.textContent = "♫ Silenciar música";
+            } catch (error) {
+                musicPlaying = false;
+                soundButton.textContent = "♫ Activar música";
+                console.log("No se pudo iniciar la música:", error);
+            }
 
-<script>
-const video = document.getElementById('memory');
-const startBtn = document.getElementById('startBtn');
-const startScreen = document.getElementById('startScreen');
-const content = document.getElementById('content');
-const sound = document.getElementById('sound');
-const floatingHearts = document.getElementById('floatingHearts');
+            // Iniciar corazones flotantes
+            createHearts();
+        });
 
-let started = false;
+        // ACTIVAR O SILENCIAR LA CANCIÓN
+        soundButton.addEventListener("click", async () => {
 
-// BOTON PARA ABRIR LA SORPRESA
+            if (musicPlaying) {
+                musica.pause();
+                musicPlaying = false;
+                soundButton.textContent = "♫ Activar música";
+            } else {
+                try {
+                    await musica.play();
+                    musicPlaying = true;
+                    soundButton.textContent = "♫ Silenciar música";
+                } catch (error) {
+                    console.log("No se pudo reproducir la música:", error);
+                }
+            }
+        });
 
-startBtn.addEventListener('click', async () => {
+        // CORAZONES ANIMADOS
+        function createHearts() {
+            setInterval(() => {
 
-if(started) return;
-started = true;
+                const heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.innerHTML = Math.random() > 0.5 ? "♡" : "♥";
 
-startScreen.classList.add('hidden');
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.fontSize = (12 + Math.random() * 20) + "px";
+                heart.style.animationDuration = (5 + Math.random() * 6) + "s";
 
-content.classList.add('show');
+                document.body.appendChild(heart);
 
-sound.classList.add('visible');
+                setTimeout(() => {
+                    heart.remove();
+                }, 11000);
 
-// Reiniciar el video al abrir la sorpresa
-video.currentTime = 0;
-
-// Intentar reproducir el video con sonido
-video.muted = false;
-
-try{
-await video.play();
-sound.innerHTML = '<span>♫</span> Silenciar';
-}catch(error){
-video.muted = true;
-try{
-await video.play();
-}catch(e){}
-sound.innerHTML = '<span>♫</span> Activar sonido';
-}
-
-// Crear corazones flotantes
-iniciarCorazones();
-
-});
-
-// BOTON DE SONIDO
-
-sound.addEventListener('click', async () => {
-
-video.muted = !video.muted;
-
-if(!video.muted){
-
-try{
-await video.play();
-}catch(error){
-video.muted = true;
-}
-
-}
-
-sound.innerHTML = video.muted
-? '<span>♫</span> Activar sonido'
-: '<span>♫</span> Silenciar';
-
-});
-
-// CORAZONES ANIMADOS
-
-function crearCorazon(){
-
-const heart = document.createElement('span');
-
-heart.className = 'floating-heart';
-heart.textContent = Math.random() > .5 ? '♡' : '♥';
-
-heart.style.left = Math.random()*100 + 'vw';
-heart.style.fontSize = (Math.random()*18+12) + 'px';
-heart.style.animationDuration = (Math.random()*7+8) + 's';
-
-floatingHearts.appendChild(heart);
-
-setTimeout(()=>{
-heart.remove();
-},16000);
-
-}
-
-function iniciarCorazones(){
-
-for(let i=0;i<18;i++){
-
-setTimeout(crearCorazon,i*350);
-
-}
-
-setInterval(crearCorazon,1000);
-
-}
-
-// Intentar mantener el video disponible
-video.addEventListener('error',()=>{
-console.warn('No se pudo cargar el video.');
-});
-
-</script>
+            }, 700);
+        }
+    </script>
 
 </body>
 </html>
-
-
-
-
