@@ -1,540 +1,461 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Un pequeño detalle</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#100d12">
+<meta name="description" content="Un pequeño detalle hecho con mucho amor.">
+<title>Feliz primer mes, mi amor ❤️</title>
 
-        :root {
-            --line-color: linear-gradient(to left top, #82ff86 20%, #144425, #104e1c);
-            --flower-center: radial-gradient(circle, #3d2003, #8b4513);
-            --leaf-color: radial-gradient(circle, #82ff86, #104e1c);
-            --petal-color: radial-gradient(circle, #ff5e00, #ffbb00);
-            --dorado-claro: #F9E076;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
 
-        body {
-            background-color: #000;
-            min-height: 100vh;
-            overflow-x: hidden;
-            font-family: 'Cormorant Garamond', serif;
-            position: relative;
-        }
+<style>
+*{box-sizing:border-box}
 
-        /* Fondo con imagen desenfocada */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://www.dl.dropboxusercontent.com/scl/fi/fl2r4nxntvp5g6d1259li/GIRASOLFONDO.png?rlkey=gxwqa1g0gd34r3k0j6v506gd1&st=p40j52o7');
-            background-size: cover;
-            background-position: center;
-            filter: blur(2px);
-            opacity: 0.2;
-            z-index: -1;
-        }
+html,body{
+margin:0;width:100%;min-height:100%;
+background:#100d12;color:#fff;
+font-family:'Cormorant Garamond',Georgia,serif;
+}
 
-        /* Brillo dorado en esquinas */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at top right, rgba(255, 187, 0, 0.3) 0%, transparent 30%),
-                        radial-gradient(circle at bottom left, rgba(255, 187, 0, 0.3) 0%, transparent 30%);
-            z-index: -1;
-            pointer-events: none;
-        }
+body{overflow:hidden}
 
-        /* Pantalla de Bienvenida */
-        .start-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #000 0%, #1a1a1a 50%, #000 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
-        }
+.scene{
+position:relative;
+isolation:isolate;
+display:grid;
+place-items:center;
+width:100%;
+min-height:100svh;
+overflow:hidden;
+background:#100d12;
+}
 
-        .start-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
+/* VIDEO DE FONDO */
 
-        .start-title {
-            color: #ffbb00;
-            font-family: 'Pacifico', cursive;
-            font-size: clamp(2.5rem, 8vw, 3.5rem);
-            text-align: center;
-            margin-bottom: 2rem;
-            text-shadow: 0 0 20px rgba(255, 187, 0, 0.5);
-            animation: glow-pulse 2s ease-in-out infinite alternate;
-        }
+.scene video{
+position:fixed;
+z-index:-4;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover;
+object-position:center;
+filter:brightness(.64) saturate(.82);
+}
 
-        .start-button {
-            background: linear-gradient(135deg, #ff5e00, #ffbb00);
-            border: none;
-            padding: 1rem 2.5rem;
-            font-family: 'Pacifico', cursive;
-            font-size: 1.5rem;
-            color: white;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(255, 94, 0, 0.4);
-            transition: all 0.3s ease;
-        }
+.shade{
+position:fixed;
+z-index:-3;
+inset:0;
+background:
+linear-gradient(180deg,rgba(10,8,12,.38),rgba(16,10,16,.15) 40%,rgba(10,8,12,.76)),
+radial-gradient(ellipse at center,transparent 15%,rgba(10,8,12,.35) 100%);
+}
 
-        .start-button::before { content: '🌻'; margin-right: 10px; }
-        .start-button:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(255, 94, 0, 0.6); }
+.grain{
+position:fixed;
+z-index:-2;
+inset:0;
+pointer-events:none;
+opacity:.10;
+background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+}
 
-        /* Contenedor Principal */
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding-top: 4rem;
-            position: relative;
-            z-index: 10;
-        }
+/* PANTALLA DE BIENVENIDA */
 
-        .main-title {
-            font-family: 'Pacifico', cursive;
-            font-size: clamp(2.5rem, 7vw, 4rem);
-            color: #ffbb00;
-            text-align: center;
-            margin-bottom: 2rem;
-            text-shadow: 0 2px 10px rgba(255, 187, 0, 0.3);
-            opacity: 0;
-            animation: fadeIn 2s forwards 0.5s;
-        }
+.start-screen{
+position:fixed;
+inset:0;
+z-index:100;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:25px;
+text-align:center;
+background:
+radial-gradient(ellipse at center,rgba(111,48,75,.20),transparent 65%),
+linear-gradient(135deg,#100d12,#1c1019 55%,#100d12);
+transition:opacity 1s ease,visibility 1s ease;
+}
 
-        .sunflower-container {
-            width: 100%;
-            height: 80vh;
-            display: grid;
-            place-items: center;
-            position: relative;
-        }
+.start-screen.hidden{
+opacity:0;
+visibility:hidden;
+pointer-events:none;
+}
 
-        .sunflower { display: flex; align-items: center; justify-content: center; }
+.start-heart{
+font-size:37px;
+color:#f2b5c9;
+margin-bottom:24px;
+animation:pulse 2s infinite;
+}
 
-        .flower_wrapper {
-            position: relative;
-            animation:
-                moving-flower-sway 4s linear infinite,
-                sunflower-glow 2s ease-in-out infinite;
-        }
+.start-title{
+font-family:'Parisienne',cursive;
+font-size:clamp(48px,10vw,76px);
+font-weight:400;
+color:#f2c0d0;
+margin:0 0 12px;
+text-shadow:0 0 30px rgba(242,176,200,.3);
+}
 
-        /* Orden de Animación del Girasol */
-        .flower_center {
-            position: absolute;
-            top: 0vmin;
-            left: 50%;
-            z-index: 5;
-            transform: translateX(-50%);
-            width: 20vmin;
-            height: 20vmin;
-            border-radius: 50%;
-            background: var(--flower-center);
-            animation: open-flower-center 2s 0.5s backwards;
-        }
+.start-subtitle{
+font-family:Arial,sans-serif;
+font-size:12px;
+letter-spacing:2px;
+color:rgba(255,240,245,.75);
+margin-bottom:38px;
+}
 
-        .flower_stem {
-            width: 2vmin;
-            height: 65vmin;
-            background-image: var(--line-color);
-            border-radius: 4vmin;
-            transform-origin: center bottom;
-            animation: grow-stem 2s 1.0s backwards;
-        }
+.start-button{
+position:relative;
+overflow:hidden;
+border:1px solid rgba(255,255,255,.4);
+border-radius:50px;
+padding:15px 34px;
+background:linear-gradient(135deg,#9c4967,#d58ba5);
+color:white;
+font-family:Arial,sans-serif;
+font-size:12px;
+letter-spacing:2px;
+cursor:pointer;
+box-shadow:0 8px 30px rgba(181,83,120,.3);
+transition:transform .3s,box-shadow .3s;
+}
 
-        .flower_petal {
-            position: absolute;
-            left: 50%;
-            z-index: 3;
-            bottom: 55vmin;
-            width: 7vmin;
-            height: 20vmin;
-            background: var(--petal-color);
-            clip-path: ellipse(50% 50% at 50% 50%);
-            transform-origin: center bottom;
-            opacity: 0;
-            animation: draw-petal-effect 0.8s forwards;
-        }
+.start-button:hover{
+transform:translateY(-3px) scale(1.04);
+box-shadow:0 12px 38px rgba(181,83,120,.5);
+}
 
-        .flower_petal-1{ --rotation: 0deg; animation-delay: 3.0s; }
-        .flower_petal-2{ --rotation: -30deg; animation-delay: 3.2s; }
-        .flower_petal-3{ --rotation: -60deg; animation-delay: 3.4s; }
-        .flower_petal-4{ --rotation: -90deg; animation-delay: 3.6s; }
-        .flower_petal-5{ --rotation: -120deg; animation-delay: 3.8s; }
-        .flower_petal-6{ --rotation: -150deg; animation-delay: 4.0s; }
-        .flower_petal-7{ --rotation: 30deg; animation-delay: 3.2s; }
-        .flower_petal-8{ --rotation: 60deg; animation-delay: 3.4s; }
-        .flower_petal-9{ --rotation: 90deg; animation-delay: 3.6s; }
-        .flower_petal-10{ --rotation: 120deg; animation-delay: 3.8s; }
-        .flower_petal-11{ --rotation: 150deg; animation-delay: 4.0s; }
-        .flower_petal-12{ --rotation: 180deg; animation-delay: 3.0s; }
+.start-button span{margin-left:8px}
 
-        .flower_leaf {
-            position: absolute;
-            left: 50%;
-            width: 7vmin;
-            height: 17vmin;
-            background: var(--leaf-color);
-            border-radius: 10vmin 2vmin 10vmin 2vmin;
-            transform-origin: center bottom;
-            opacity: 0;
-        }
+/* CONTENIDO PRINCIPAL */
 
-        .flower_leaf-1{ bottom: 18vmin; --transform-final: translateX(-50%) rotate(90deg); animation: grow-leaf 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) 5s forwards; }
-        .flower_leaf-2{ bottom: 23vmin; --transform-final: translateX(-50%) rotate(-90deg); animation: grow-leaf 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) 5.6s forwards; }
+.content{
+width:min(90%,680px);
+padding:35px 20px;
+text-align:center;
+opacity:0;
+transform:translateY(22px);
+filter:blur(7px);
+transition:opacity 1.6s ease,transform 1.6s ease,filter 1.6s ease;
+pointer-events:none;
+}
 
-        .center_dot {
-            position: absolute;
-            width: 1.5vmin;
-            height: 1.5vmin;
-            background-color: #4a2a07;
-            border-radius: 50%;
-            opacity: 0;
-            animation: pop-in 0.8s ease-out forwards;
-        }
+.content.show{
+opacity:1;
+transform:translateY(0);
+filter:blur(0);
+pointer-events:auto;
+}
 
-        .center_dot-1 { top: 25%; left: 50%; animation-delay: 4.5s; }
-        .center_dot-2 { top: 45%; left: 55%; animation-delay: 4.6s; }
-        .center_dot-3 { top: 35%; left: 35%; animation-delay: 4.7s; }
-        .center_dot-4 { top: 60%; left: 40%; animation-delay: 4.8s; }
-        .center_dot-5 { top: 55%; left: 70%; animation-delay: 4.9s; }
-        .center_dot-6 { top: 75%; left: 50%; animation-delay: 5.0s; }
-        .center_dot-7 { top: 30%; left: 70%; animation-delay: 5.1s; }
-        .center_dot-8 { top: 80%; left: 30%; animation-delay: 5.2s; }
+.eyebrow{
+font-family:Arial,sans-serif;
+font-size:10px;
+letter-spacing:.34em;
+text-transform:uppercase;
+color:#f1c4d2;
+margin-bottom:24px;
+}
 
-        /* Sección del Mensaje de Amor */
-        .love-message-section {
-            width: 100%;
-            min-height: 100vh;
-            padding: 5rem 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #f0f0f0;
-            text-align: center;
-        }
+.heart{
+color:#f2b5c9;
+font-size:30px;
+display:block;
+margin:0 auto 18px;
+animation:pulse 2.4s ease-in-out infinite;
+}
 
-        .love-message-content {
-            max-width: 700px;
-            background: rgba(26, 26, 26, 0.6);
-            border: 1px solid rgba(255, 187, 0, 0.2);
-            border-radius: 20px;
-            padding: 3rem;
-            backdrop-filter: blur(8px);
-            position: relative;
-            animation: section-glow 2s ease-in-out infinite;
-        }
+h1{
+font-family:'Parisienne',cursive;
+font-weight:400;
+font-size:clamp(48px,9vw,78px);
+line-height:1.12;
+margin:0 auto 20px;
+text-shadow:0 3px 28px rgba(0,0,0,.5);
+}
 
-        .love-message-content h2 { font-family: 'Pacifico', cursive; color: #ffbb00; font-size: 2.5rem; margin-bottom: 2rem; }
-        .love-message-content p { font-size: 1.2rem; line-height: 1.8; margin-bottom: 1.5rem; text-align: justify; }
+h1 span{color:#f2c0d0}
 
-        /* Imagen de flor con resplandor */
-        .footer-image {
-            display: block;
-            width: 130%;
-            max-width: 200px;
-            height: auto;
-            margin: 2rem auto 0;
-            border-radius: 25px;
-            position: relative;
-            animation: image-glow 2s ease-in-out infinite;
-        }
+.sub{
+font-family:Arial,sans-serif;
+font-size:13px;
+line-height:1.9;
+letter-spacing:.04em;
+color:rgba(255,245,248,.93);
+max-width:440px;
+margin:0 auto;
+}
 
-        /* Botón de Música */
-        #musicButton {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 187, 0, 0.2);
-            border: 1px solid rgba(255, 187, 0, 0.3);
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
-        }
+.rule{
+height:1px;
+width:52px;
+background:#e9aebe;
+margin:28px auto 0;
+opacity:.8;
+}
 
-        #musicButton:hover { background: rgba(255, 187, 0, 0.4); transform: scale(1.1); }
-        #musicButton svg { width: 24px; height: 24px; fill: #ffbb00; }
-        #playIcon, #pauseIcon { transition: opacity 0.3s ease; }
-        #pauseIcon { display: none; }
+/* CORAZONES FLOTANTES */
 
-        /* Capas de partículas */
-        .light {
-            position: fixed;
-            width: 0.8vmin;
-            height: 0.8vmin;
-            background-color: rgb(255, 251, 0);
-            border-radius: 50%;
-            filter: blur(0.15vmin);
-            animation: twinkle 6s linear infinite;
-            z-index: 1;
-        }
+.floating-hearts{
+position:fixed;
+inset:0;
+z-index:-1;
+pointer-events:none;
+overflow:hidden;
+}
 
-        .flotantes-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 2;
-        }
+.floating-heart{
+position:absolute;
+bottom:-50px;
+color:#f2b5c9;
+opacity:0;
+animation:floatUp linear forwards;
+text-shadow:0 0 12px rgba(242,181,201,.5);
+}
 
-        .petalo {
-            position: absolute;
-            opacity: 0;
-            color: var(--dorado-claro);
-            font-size: 1.5rem;
-            animation: caer 12s linear infinite;
-        }
+/* BOTON DE SONIDO */
 
-        /* Más partículas de fondo */
-        .light-1{ top: 10%; left: 15%; animation-duration: 5s; }
-        .light-2{ top: 50%; left: 80%; animation-duration: 4s; }
-        .light-3{ top: 80%; left: 30%; animation-duration: 6s; }
-        .light-4{ top: 30%; left: 5%; animation-duration: 3.5s; }
-        .light-5{ top: 90%; left: 95%; animation-duration: 5.5s; }
-        .light-6{ top: 5%; left: 50%; animation-duration: 4.2s; }
-        .light-7{ top: 65%; left: 60%; animation-duration: 7s; }
-        .light-8{ top: 20%; left: 90%; animation-duration: 3.8s; }
-        .light-9{ top: 40%; left: 25%; animation-duration: 5.2s; }
-        .light-10{ top: 75%; left: 10%; animation-duration: 6.5s; }
-        .light-11{ top: 15%; left: 70%; animation-duration: 4.8s; }
-        .light-12{ top: 95%; left: 45%; animation-duration: 3.2s; }
-        .light-13{ top: 55%; left: 5%; animation-duration: 5.8s; }
-        .light-14{ top: 25%; left: 40%; animation-duration: 4.5s; }
-        .light-15{ top: 85%; left: 75%; animation-duration: 6.2s; }
-        .light-16{ top: 5%; left: 20%; animation-duration: 3.9s; }
-        .light-17{ top: 50%; left: 95%; animation-duration: 5.3s; }
-        .light-18{ top: 70%; left: 50%; animation-duration: 4.1s; }
-        .light-19{ top: 35%; left: 85%; animation-duration: 6.8s; }
-        .light-20{ top: 90%; left: 15%; animation-duration: 3.6s; }
-        .light-21{ top: 8%; left: 80%; animation-duration: 5.1s; }
-        .light-22{ top: 60%; left: 35%; animation-duration: 4.6s; }
-        .light-23{ top: 22%; left: 65%; animation-duration: 6.3s; }
-        .light-24{ top: 78%; left: 90%; animation-duration: 3.7s; }
-        .light-25{ top: 12%; left: 5%; animation-duration: 5.6s; }
-        .light-26{ top: 45%; left: 55%; animation-duration: 4.3s; }
-        .light-27{ top: 92%; left: 25%; animation-duration: 6.6s; }
-        .light-28{ top: 3%; left: 30%; animation-duration: 3.4s; }
-        .light-29{ top: 68%; left: 88%; animation-duration: 5.9s; }
-        .light-30{ top: 18%; left: 48%; animation-duration: 4.9s; }
-        .light-31{ top: 82%; left: 8%; animation-duration: 6.1s; }
-        .light-32{ top: 28%; left: 98%; animation-duration: 3.3s; }
-        .light-33{ top: 58%; left: 28%; animation-duration: 5.4s; }
-        .light-34{ top: 2%; left: 75%; animation-duration: 4.7s; }
-        .light-35{ top: 88%; left: 58%; animation-duration: 6.9s; }
-        .light-36{ top: 48%; left: 2%; animation-duration: 3.1s; }
-        .light-37{ top: 72%; left: 42%; animation-duration: 5.7s; }
-        .light-38{ top: 23%; left: 18%; animation-duration: 4.4s; }
-        .light-39{ top: 98%; left: 82%; animation-duration: 6.4s; }
-        .light-40{ top: 52%; left: 72%; animation-duration: 3.5s; }
+.sound{
+position:fixed;
+bottom:max(26px,env(safe-area-inset-bottom));
+left:50%;
+transform:translateX(-50%);
+z-index:20;
+border:1px solid rgba(255,255,255,.42);
+background:rgba(18,12,18,.45);
+backdrop-filter:blur(12px);
+color:#fff;
+border-radius:999px;
+padding:12px 19px;
+font-family:Arial,sans-serif;
+font-size:11px;
+letter-spacing:.12em;
+text-transform:uppercase;
+cursor:pointer;
+opacity:0;
+visibility:hidden;
+transition:opacity .8s ease;
+}
 
-        /* Keyframes & Animaciones */
-        @keyframes fadeIn { to { opacity: 1; } }
-        @keyframes glow-pulse {
-            from { text-shadow: 0 0 20px rgba(255, 187, 0, 0.5); }
-            to { text-shadow: 0 0 30px rgba(255, 187, 0, 0.8), 0 0 40px rgba(255, 94, 0, 0.4); }
-        }
+.sound.visible{
+opacity:1;
+visibility:visible;
+}
 
-        /* Animación del resplandor del girasol más intensa y suave */
-        @keyframes sunflower-glow {
-            0% { filter: drop-shadow(0 0 20px rgba(255, 223, 0, 0.9)); }
-            50% { filter: drop-shadow(0 0 40px rgba(255, 223, 0, 1)); }
-            100% { filter: drop-shadow(0 0 20px rgba(255, 223, 0, 0.9)); }
-        }
+.sound span{
+color:#f2c0d0;
+margin-right:7px;
+}
 
-        /* Resplandor para la sección de texto */
-        @keyframes section-glow {
-            0% { box-shadow: 0 0 20px rgba(255, 223, 0, 0.5); }
-            50% { box-shadow: 0 0 30px rgba(255, 223, 0, 0.7); }
-            100% { box-shadow: 0 0 20px rgba(255, 223, 0, 0.5); }
-        }
+/* ANIMACIONES */
 
-        /* Resplandor para la imagen */
-        @keyframes image-glow {
-            0% { box-shadow: 0 0 20px rgba(255, 223, 0, 0.5); }
-            50% { box-shadow: 0 0 30px rgba(255, 223, 0, 0.7); }
-            100% { box-shadow: 0 0 20px rgba(255, 223, 0, 0.5); }
-        }
+@keyframes pulse{
+0%,100%{transform:scale(1);opacity:.85}
+50%{transform:scale(1.14);opacity:1}
+}
 
-        /* Balanceo más rápido e intenso */
-        @keyframes moving-flower-sway {
-            0%, 100% { transform: rotate(5deg); }
-            50% { transform: rotate(-5deg); }
-        }
+@keyframes floatUp{
+0%{transform:translateY(0) rotate(0deg);opacity:0}
+10%{opacity:.7}
+85%{opacity:.5}
+100%{transform:translateY(-110vh) rotate(35deg);opacity:0}
+}
 
-        @keyframes draw-petal-effect { from { opacity: 0; transform: translateX(-50%) rotate(var(--rotation)) scale(0); } to { opacity: 1; transform: translateX(-50%) rotate(var(--rotation)) scale(1); } }
-        @keyframes grow-stem { from { opacity: 0; transform: scaleY(0); } to { opacity: 1; transform: scaleY(1); } }
-        @keyframes open-flower-center { from { opacity: 0; transform: translateX(-50%) scale(0); } to { opacity: 1; transform: translateX(-50%) scale(1); } }
-        @keyframes grow-leaf { from { opacity: 0; transform: translateX(-50%) scale(0); } to { opacity: 1; transform: var(--transform-final); } }
-        @keyframes pop-in { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{
+animation:none!important;
+transition:none!important;
+}
+}
 
-        @keyframes twinkle {
-            0% { opacity: 0.2; transform: scale(0.7) translateY(0px); }
-            50% { opacity: 1; }
-            100% { opacity: 0.2; transform: scale(1.1) translateY(-20px); }
-        }
-
-        @keyframes caer {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-        }
-
-        .animation-paused * { animation-play-state: paused !important; }
-
-        /* Media Queries */
-        @media (max-width: 768px) {
-            body::-webkit-scrollbar { display: none; }
-            body { -ms-overflow-style: none; scrollbar-width: none; }
-
-            .love-message-content {
-                width: 90%;
-                padding: 2rem 1.5rem;
-            }
-        }
-    </style>
+@media(max-width:600px){
+.content{width:94%;padding:25px 12px}
+.start-subtitle{font-size:10px;line-height:1.8}
+}
+</style>
 </head>
+
 <body>
 
-    <div class="start-screen" id="startScreen">
-        <h1 class="start-title">!Hola¡ ✨</h1>
-        <button class="start-button" id="startBtn">Abrir</button>
-    </div>
+<main class="scene">
 
-    <div class="flotantes-container" id="flotantesContainer"></div>
-    <div class="light light-1"></div><div class="light light-2"></div><div class="light light-3"></div><div class="light light-4"></div><div class="light light-5"></div><div class="light light-6"></div><div class="light light-7"></div><div class="light light-8"></div><div class="light light-9"></div><div class="light light-10"></div><div class="light light-11"></div><div class="light light-12"></div><div class="light light-13"></div><div class="light light-14"></div><div class="light light-15"></div><div class="light light-16"></div><div class="light light-17"></div><div class="light light-18"></div><div class="light light-19"></div><div class="light light-20"></div><div class="light light-21"></div><div class="light light-22"></div><div class="light light-23"></div><div class="light light-24"></div><div class="light light-25"></div><div class="light light-26"></div><div class="light light-27"></div><div class="light light-28"></div><div class="light light-29"></div><div class="light light-30"></div><div class="light light-31"></div><div class="light light-32"></div><div class="light light-33"></div><div class="light light-34"></div><div class="light light-35"></div><div class="light light-36"></div><div class="light light-37"></div><div class="light light-38"></div><div class="light light-39"></div><div class="light light-40"></div>
+<!-- VIDEO -->
+<video id="memory" autoplay muted loop playsinline preload="auto" aria-label="Nuestro recuerdo">
+<source src="video-boomerang.mp4" type="video/mp4">
+</video>
 
-    <div class="main-content animation-paused" id="mainContainer">
-        
-        <h1 class="main-title">Un pequeño detalle...</h1>
+<div class="shade"></div>
+<div class="grain"></div>
 
-        <div class="sunflower-container">
-            <div class="sunflower">
-                <div class="flower_wrapper">
-                    <div class="flower_stem"></div>
-                    <div class="flower_center">
-                        <div class="center_dot center_dot-1"></div><div class="center_dot center_dot-2"></div><div class="center_dot center_dot-3"></div><div class="center_dot center_dot-4"></div><div class="center_dot center_dot-5"></div><div class="center_dot center_dot-6"></div><div class="center_dot center_dot-7"></div><div class="center_dot center_dot-8"></div>
-                    </div>
-                    <div class="flower_petal flower_petal-1"></div><div class="flower_petal flower_petal-2"></div><div class="flower_petal flower_petal-3"></div><div class="flower_petal flower_petal-4"></div><div class="flower_petal flower_petal-5"></div><div class="flower_petal flower_petal-6"></div><div class="flower_petal flower_petal-7"></div><div class="flower_petal flower_petal-8"></div><div class="flower_petal flower_petal-9"></div><div class="flower_petal flower_petal-10"></div><div class="flower_petal flower_petal-11"></div><div class="flower_petal flower_petal-12"></div>
-                    <div class="flower_leaf flower_leaf-1"></div><div class="flower_leaf flower_leaf-2"></div>
-                </div>
-            </div>
-        </div>
+<!-- CORAZONES -->
+<div class="floating-hearts" id="floatingHearts"></div>
 
-        <section class="love-message-section">
-            <div class="love-message-content">
-                <h2>Sheyna...</h2>
-                <p>Para comenzar, agradezco a dios el permitirme haberme cruzado contigo, me encantó el conversar contigo después de cada ensayo, me encantó el poder compartir mis cosas y también que tu me compartas tus cosas, me encantó el irme acompañado cerca de casa de alguien tan agradable como tu, me encantó tu compañía, me encantó tu risa, me encantó tu forma de ver las cosas, simplemente me encantó el hecho de haberte conocido.</p>
-                <p>Eres especial sheyna, aunque no lo creas, eres alguien valiente y fuerte, que tuvo obstáculos en su vida y los superó cada uno de ellos con creces, eres bella y hermosa, siempre deslumbrando con tu brillo propio, con una mirada encantadora y sonrisa cautivadora, eres amable y buena, con un gran corazón y un alma noble que siempre voltea a ayudar a quien lo necesite sin esperar nada a cambio, eres brillante e inteligente, pudiste concluir tus estudios de gran manera, recuerdo cuando te dieron tu bachiller, me puse muy contento por ti, eres trabajadora y perseverante, das lo mejor de ti y te esfuerzas para cumplir con tus objetivos y metas, eres agradable y amable, escuchas a los demás y les brindas apoyo cuando lo necesitan, eres centrada y admirable, buscas mejorar y salir adelante sin importar que, eres tierna y empatica, tratas de ponerte en los zapatos de los demás, para apoyarlos y ayudarlos como puedas. Estas son algunas de tus cualidades, eres una gran persona que no necesita cambiar nada, solo sigue siendo tal y como eres, a veces dices que eres mala y tienes muchos defectos pero no ves lo buena y virtuosa que eres.</p>
-                <p>Eres una persona que vale mucho, nunca permitas que te digan lo contrario, te mereces una buena vida y muchas cosas buenas, te mereces ser feliz, reír en voz alta, que cada uno de tus sueños se cumpla y sobre todo que ganes en la vida. Siempre te desearé lo mejor, gracias por aparecerte en mi camino, con mucho cariño Sebastian.</p>
-                <img src="https://raw.githubusercontent.com/sebastianleo708-rgb/tulipanes/main/tulipanes-amarillos-txb5rc531qyleiuw.jpg" alt="Flor amarilla" class="footer-image">
-            </div>
-        </section>
-    </div>
+<!-- PANTALLA INICIAL -->
+<div class="start-screen" id="startScreen">
 
-    <audio id="backgroundMusic" loop>
-        <source src=https://raw.githubusercontent.com/sebastianleo708-rgb/tulipanes/main/lalalanddef.mp3>
-        Tu navegador no soporta el elemento de audio.
-    </audio>
+<div class="start-heart">♡</div>
 
-    <button id="musicButton">
-        <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
-        <svg id="pauseIcon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
-    </button>
+<h2 class="start-title">Hola, mi amor</h2>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const startBtn = document.getElementById('startBtn');
-            const mainContainer = document.getElementById('mainContainer');
-            const music = document.getElementById('backgroundMusic');
-            const musicButton = document.getElementById('musicButton');
-            const playIcon = document.getElementById('playIcon');
-            const pauseIcon = document.getElementById('pauseIcon');
+<p class="start-subtitle">
+TENGO UN PEQUEÑO DETALLE PARA TI...
+</p>
 
-            startBtn.addEventListener('click', () => {
-                document.getElementById('startScreen').classList.add('hidden');
-                mainContainer.classList.remove('animation-paused');
-                document.body.style.overflowY = 'auto';
-                toggleMusic(true);
-                iniciarPetalos();
-            });
+<button class="start-button" id="startBtn">
+Abrir mi regalo <span>♡</span>
+</button>
 
-            musicButton.addEventListener('click', () => toggleMusic());
+</div>
 
-            function toggleMusic(forcePlay = false) {
-                if (forcePlay || music.paused) {
-                    music.play().catch(e => console.log("Error al reproducir audio:", e));
-                    playIcon.style.display = 'none';
-                    pauseIcon.style.display = 'block';
-                } else {
-                    music.pause();
-                    playIcon.style.display = 'block';
-                    pauseIcon.style.display = 'none';
-                }
-            }
+<!-- DEDICATORIA -->
+<section class="content" id="content">
 
-            function crearPetalo() {
-                const contenedor = document.getElementById('flotantesContainer');
-                const petalo = document.createElement('div');
-                petalo.classList.add('petalo');
-                petalo.innerHTML = '❁';
+<div class="eyebrow">
+Un pequeño recuerdo para nosotros
+</div>
 
-                petalo.style.left = `${Math.random() * 100}vw`;
-                petalo.style.fontSize = `${Math.random() * 1.2 + 1}rem`;
-                petalo.style.animationDuration = `${Math.random() * 5 + 8}s`;
-                petalo.style.animationDelay = `${Math.random() * 5}s`;
+<span class="heart">♡</span>
 
-                contenedor.appendChild(petalo);
-            }
+<h1>
+Feliz primer mes<br>
+<span>mi amor ❤️</span>
+</h1>
 
-            function iniciarPetalos() {
-                for (let i = 0; i < 28; i++) {
-                    crearPetalo();
-                }
-            }
-        });
-    </script>
+<p class="sub">
+Que este sea solo el comienzo de una historia
+llena de momentos bonitos. Te elegiría
+una y mil veces.
+</p>
+
+<div class="rule"></div>
+
+</section>
+
+<!-- SONIDO -->
+<button class="sound" id="sound" type="button">
+<span>♫</span> Activar sonido
+</button>
+
+</main>
+
+<script>
+const video = document.getElementById('memory');
+const startBtn = document.getElementById('startBtn');
+const startScreen = document.getElementById('startScreen');
+const content = document.getElementById('content');
+const sound = document.getElementById('sound');
+const floatingHearts = document.getElementById('floatingHearts');
+
+let started = false;
+
+// BOTON PARA ABRIR LA SORPRESA
+
+startBtn.addEventListener('click', async () => {
+
+if(started) return;
+started = true;
+
+startScreen.classList.add('hidden');
+
+content.classList.add('show');
+
+sound.classList.add('visible');
+
+// Reiniciar el video al abrir la sorpresa
+video.currentTime = 0;
+
+// Intentar reproducir el video con sonido
+video.muted = false;
+
+try{
+await video.play();
+sound.innerHTML = '<span>♫</span> Silenciar';
+}catch(error){
+video.muted = true;
+try{
+await video.play();
+}catch(e){}
+sound.innerHTML = '<span>♫</span> Activar sonido';
+}
+
+// Crear corazones flotantes
+iniciarCorazones();
+
+});
+
+// BOTON DE SONIDO
+
+sound.addEventListener('click', async () => {
+
+video.muted = !video.muted;
+
+if(!video.muted){
+
+try{
+await video.play();
+}catch(error){
+video.muted = true;
+}
+
+}
+
+sound.innerHTML = video.muted
+? '<span>♫</span> Activar sonido'
+: '<span>♫</span> Silenciar';
+
+});
+
+// CORAZONES ANIMADOS
+
+function crearCorazon(){
+
+const heart = document.createElement('span');
+
+heart.className = 'floating-heart';
+heart.textContent = Math.random() > .5 ? '♡' : '♥';
+
+heart.style.left = Math.random()*100 + 'vw';
+heart.style.fontSize = (Math.random()*18+12) + 'px';
+heart.style.animationDuration = (Math.random()*7+8) + 's';
+
+floatingHearts.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},16000);
+
+}
+
+function iniciarCorazones(){
+
+for(let i=0;i<18;i++){
+
+setTimeout(crearCorazon,i*350);
+
+}
+
+setInterval(crearCorazon,1000);
+
+}
+
+// Intentar mantener el video disponible
+video.addEventListener('error',()=>{
+console.warn('No se pudo cargar el video.');
+});
+
+</script>
+
 </body>
-
 </html>
+
 
 
 
